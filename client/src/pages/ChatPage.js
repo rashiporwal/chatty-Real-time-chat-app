@@ -60,7 +60,7 @@ function ChatPage() {
       const formattedHistory = history.map((msg) => ({
         user: msg.author,
         text: msg.text,
-        timestamp:msg.createdAt || msg.timestamp,
+        timestamp: msg.createdAt || msg.timestamp,
       }));
 
       setMessages((prevMessages) => [...prevMessages, ...formattedHistory]);
@@ -87,18 +87,20 @@ function ChatPage() {
     };
 
     const newPrivateMessageListener = (message) => {
-      const otherUserId = socket.id === message.sender.id ? message.recipient.id : message.sender.id;
+      const otherUserId =
+        message.sender.id === socket.id
+          ? message.recipient.id
+          : message.sender.id;
 
-      setPrivateMessages(prev => {
+      setPrivateMessages((prev) => {
         const existingMessages = prev[otherUserId] || [];
 
         return {
           ...prev,
-          [otherUserId]:[...existingMessages,message]
+          [otherUserId]: [...existingMessages, message],
         };
       });
-      console.log("Private message received:",message);
-      
+      console.log("Private message received:", message);
     };
 
     socket.on("message", messageListener);
@@ -107,7 +109,7 @@ function ChatPage() {
     socket.on("chatHistory", loadHistory);
     socket.on("userTyping", userTypingListener);
     socket.on("userStoppedTyping", userStoppedTypingListener);
-    socket.on("newPrivateMessage",newPrivateMessageListener);
+    socket.on("newPrivateMessage", newPrivateMessageListener);
 
     return () => {
       socket.off("message", messageListener);
@@ -116,12 +118,14 @@ function ChatPage() {
       socket.off("chatHistory", loadHistory);
       socket.off("userTyping", userTypingListener);
       socket.off("userStoppedTyping", userStoppedTypingListener);
-      socket.off('newPrivateMessage',newPrivateMessageListener);
+      socket.off("newPrivateMessage", newPrivateMessageListener);
 
       if (typingTimerRef.current) {
         clearTimeout(typingTimerRef.current);
       }
+      socket.joined = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, room]); // yha username,room pass kiya
 
   const messagesForPrivateChat = privateChatTarget ? privateMessages[privateChatTarget.id] || []
@@ -133,7 +137,7 @@ function ChatPage() {
       <div className="chat-container">
         {/* {sidebar for userlist} */}
         <div className="sidebar">
-          <h3>RoomName:{room}</h3>
+          <h3>RoomName:{room  || "No room joined"}</h3>
           <UserList users={users} onUserSelect={handleUserSelect}/>
           {/* {This placeholder for the userList component} */}
         </div>
