@@ -1,0 +1,144 @@
+
+
+.private-chat-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.private-chat-window{
+    background-color: white;
+    width: 400px;
+    max-width: 90%;
+    height: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.private-chat-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #007bff;
+    color: white;
+    border-top-left-radius: 8px ;
+    border-top-right-radius: 8px;
+}
+
+.private-chat-header h4{
+    margin: 0;
+}
+
+.close-button{
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+}
+
+
+.private-chat-messages p{
+    color: rgb(14, 27, 27);
+    text-shadow: 1px 1px 1px violet;
+}
+
+
+.private-chat-input{
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+
+.private-chat-input input{
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+}
+
+.private-chat-input button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    margin: 10px;
+    height: 50px;
+    width: 100px;
+}
+
+.sendBtn{
+    margin: 5px;
+}
+
+.private-chat-messages{
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+}
+
+.private-chat-messages ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.my-private-message, .their-private-message{
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.my-private-message .message-content, .their-private-message .message-content{
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 75%;
+    word-wrap: break-word;
+}
+
+.my-private-message .message-content{
+    background-color: #007bff;
+    color: white;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 20px;
+}
+
+.their-private-message{
+    justify-content: flex-start;
+}
+
+.their-private-message .message-content{
+    background-color: #e9e9e9;
+    color: #333;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 20px;
+}
+
+.private-message-timestamp{
+    display: block;
+    font-size: 0.7em;
+    text-align: right;
+    margin-top: 5px;
+    color: rgba(255,255,255,0.8);
+}
+
+.their-private-message .private-message-timestamp{
+    color: #666do ;;
+}
