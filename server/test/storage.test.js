@@ -37,6 +37,27 @@ test('falls back to memory in production when explicitly allowed', async () => {
   assert.equal(result.store, memoryStore);
 });
 
+test('allows memory storage by default when MongoDB is unavailable', async () => {
+  const originalValue = process.env.ALLOW_IN_MEMORY;
+  delete process.env.ALLOW_IN_MEMORY;
+
+  try {
+    const result = await initializeStorage({
+      connect: async () => {
+        throw new Error('DNS lookup failed');
+      },
+      databaseUrl: 'mongodb+srv://unreachable.test/chatty',
+      isProduction: true,
+      logger,
+    });
+
+    assert.equal(result.storage, 'memory');
+  } finally {
+    if (originalValue === undefined) delete process.env.ALLOW_IN_MEMORY;
+    else process.env.ALLOW_IN_MEMORY = originalValue;
+  }
+});
+
 test('fails closed in production when memory storage is not allowed', async () => {
   await assert.rejects(
     initializeStorage({

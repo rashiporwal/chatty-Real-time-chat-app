@@ -87,7 +87,7 @@ This starts both the backend and Vite. Open `http://localhost:5173`; the client 
 | `PORT` | No | `5000` | HTTP and Socket.IO port |
 | `CLIENT_URL` | No | Local Vite origins in development | Comma-separated allowed client origins when hosted separately |
 | `NODE_ENV` | No | — | Set to `production` in production |
-| `ALLOW_IN_MEMORY` | No | `false` in production | Allows production startup without MongoDB; history resets on restart |
+| `ALLOW_IN_MEMORY` | No | `true` | Keeps the app available with temporary history if MongoDB is missing or unreachable; set to `false` to require MongoDB |
 
 ### Client
 

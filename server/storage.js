@@ -6,7 +6,7 @@ async function initializeStorage({
   databaseStore = messageStore,
   createMemoryStore = createMemoryMessageStore,
   databaseUrl = process.env.DATABASE_URL,
-  allowInMemory = process.env.ALLOW_IN_MEMORY === 'true',
+  allowInMemory = process.env.ALLOW_IN_MEMORY !== 'false',
   isProduction = process.env.NODE_ENV === 'production',
   logger = console,
 } = {}) {
