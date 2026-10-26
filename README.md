@@ -27,4 +27,5 @@ Existing deployment: [chatty-real-time-chat-app-b561.onrender.com](https://chatt
 - Health endpoint, graceful shutdown, and production SPA routing
 - Server integration tests and client tests
 
+<img width="1917" height="978" alt="image" src="https://github.com/user-attachments/assets/b311c867-d8d8-4613-bb4d-256cb36d99cd" />
 
