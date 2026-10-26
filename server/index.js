@@ -2,32 +2,13 @@ require('dotenv').config();
 
 const mongoose = require('mongoose');
 const connectDB = require('./db');
-const { messageStore } = require('./messageStore');
-const { createMemoryMessageStore } = require('./memoryMessageStore');
 const { createChatServer } = require('./server');
+const { initializeStorage } = require('./storage');
 
 const port = Number(process.env.PORT) || 5000;
 
 async function start() {
-  let store = messageStore;
-  let storage = 'mongodb';
-
-  if (process.env.DATABASE_URL) {
-    try {
-      await connectDB();
-    } catch (error) {
-      if (process.env.NODE_ENV === 'production') throw error;
-      console.warn(`MongoDB is unavailable (${error.message}). Using temporary in-memory history.`);
-      store = createMemoryMessageStore();
-      storage = 'memory';
-    }
-  } else if (process.env.NODE_ENV === 'production' && process.env.ALLOW_IN_MEMORY !== 'true') {
-    throw new Error('DATABASE_URL is required in production.');
-  } else {
-    console.warn('DATABASE_URL is not set. Using temporary in-memory history.');
-    store = createMemoryMessageStore();
-    storage = 'memory';
-  }
+  const { store, storage } = await initializeStorage({ connect: connectDB });
 
   const { httpServer, io } = createChatServer({ store, storage });
   await new Promise((resolve) => httpServer.listen(port, resolve));

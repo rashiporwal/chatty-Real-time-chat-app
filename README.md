@@ -130,7 +130,7 @@ cd ../server && npm ci --omit=dev && npm start
 
 Set `NODE_ENV=production` and `DATABASE_URL`. If the client is hosted on another origin, also set `CLIENT_URL` and build the client with `VITE_SOCKET_URL` pointing at the server. If both are served by this Node process, leave `VITE_SOCKET_URL` unset so the browser uses the current origin.
 
-For Render, the repository includes `render.yaml`. It builds both applications, starts the Node service, configures `/api/health`, and permits temporary in-memory storage until a `DATABASE_URL` secret is supplied. Add `DATABASE_URL` in the Render dashboard for persistent public-room history.
+For Render, the repository includes `render.yaml`. It builds both applications, starts the Node service, configures `/api/health`, and permits temporary in-memory storage until a working `DATABASE_URL` secret is supplied. When `ALLOW_IN_MEMORY=true`, an unavailable MongoDB deployment no longer prevents the web service from starting; add or repair `DATABASE_URL` for persistent public-room history.
 
 ## Socket event contract
 
