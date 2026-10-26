@@ -1,0 +1,56 @@
+.media-picker {
+  position: absolute;
+  z-index: 30;
+  bottom: calc(100% - 7px);
+  left: clamp(12px, 1.7vw, 22px);
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  width: min(430px, calc(100% - 24px));
+  max-height: min(520px, calc(100dvh - 150px));
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.17);
+  border-radius: 20px;
+  color: #edf1ff;
+  background: rgba(15,22,42,0.9);
+  box-shadow: 0 28px 75px rgba(0,0,0,0.56), inset 0 1px 0 rgba(255,255,255,0.16);
+  backdrop-filter: blur(26px) saturate(145%);
+  animation: picker-in 180ms ease-out both;
+}
+
+.picker-header { display: flex; align-items: center; gap: 8px; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.picker-tabs { display: grid; grid-template-columns: repeat(3, 1fr); flex: 1; gap: 5px; }
+.picker-tabs button, .picker-close { border: 1px solid transparent; border-radius: 10px; color: #aab4cd; background: transparent; cursor: pointer; transition: 160ms ease; }
+.picker-tabs button { padding: 9px 6px; font-size: 0.75rem; font-weight: 700; }
+.picker-tabs button:hover, .picker-tabs button.active { color: white; border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.08); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); }
+.picker-close { width: 34px; height: 34px; font-size: 1.25rem; }
+.picker-close:hover { color: white; background: rgba(255,255,255,0.09); transform: rotate(5deg); }
+.picker-search { margin: 10px 12px 0; padding: 10px 12px; border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: white; background: rgba(255,255,255,0.055); outline: none; }
+.picker-search:focus { border-color: rgba(139,129,255,0.7); box-shadow: 0 0 0 3px rgba(117,108,241,0.11); }
+.picker-content { min-height: 0; padding: 12px; overflow-y: auto; }
+.emoji-group + .emoji-group { margin-top: 12px; }
+.emoji-group > span { display: block; margin-bottom: 7px; color: #8f9bb8; font-size: 0.67rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.emoji-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; }
+.emoji-grid button { display: grid; aspect-ratio: 1; place-items: center; border: 1px solid transparent; border-radius: 10px; background: transparent; font-size: 1.35rem; cursor: pointer; transition: 140ms ease; }
+.emoji-grid button:hover { border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.08); transform: translateY(-2px) scale(1.08); }
+.sticker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.sticker-option { display: grid; gap: 5px; place-items: center; padding: 10px 6px; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; color: #cbd3e7; background: rgba(255,255,255,0.035); font-size: 0.68rem; cursor: pointer; transition: 160ms ease; }
+.sticker-option:hover, .sticker-option.selected { border-color: rgba(143,133,255,0.48); background: rgba(120,107,241,0.12); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.22); }
+.sticker-art { display: grid; width: 62px; height: 62px; place-items: center; border-radius: 20px; font-size: 2.2rem; filter: drop-shadow(0 8px 9px rgba(0,0,0,0.28)); }
+.sticker-art.violet { background: linear-gradient(135deg,#6f5ee8,#44399e); } .sticker-art.cyan { background: linear-gradient(135deg,#1da7b2,#176480); } .sticker-art.pink { background: linear-gradient(135deg,#e45891,#963568); } .sticker-art.orange { background: linear-gradient(135deg,#ec7b45,#a63f31); } .sticker-art.blue { background: linear-gradient(135deg,#487fe5,#3152a4); } .sticker-art.amber { background: linear-gradient(135deg,#c98a36,#76501f); }
+.meme-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; }
+.meme-option { display: grid; min-height: 125px; grid-template-rows: auto 1fr auto; padding: 10px; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; color: white; background: linear-gradient(145deg,#28334f,#12192c); text-align: left; cursor: pointer; transition: 170ms ease; }
+.meme-option > span { color: rgba(255,255,255,0.75); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; }
+.meme-option > b { align-self: center; font-size: 2.3rem; text-align: center; filter: drop-shadow(0 7px 9px rgba(0,0,0,0.3)); }
+.meme-option > strong { font-size: 0.78rem; letter-spacing: 0.05em; }
+.meme-option:hover, .meme-option.selected { border-color: rgba(255,255,255,0.3); transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.3); }
+.meme-option.violet { background: linear-gradient(145deg,#4e3d91,#1d1a38); } .meme-option.cyan { background: linear-gradient(145deg,#1e7180,#132c3a); } .meme-option.orange { background: linear-gradient(145deg,#944c2e,#321d1c); } .meme-option.blue { background: linear-gradient(145deg,#31569a,#17213b); } .meme-option.pink { background: linear-gradient(145deg,#8a355f,#32182c); } .meme-option.green { background: linear-gradient(145deg,#28725e,#122f2b); }
+.picker-preview { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-top: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.04); }
+.picker-preview span { overflow: hidden; color: #aeb8d0; font-size: 0.74rem; text-overflow: ellipsis; white-space: nowrap; }
+.picker-preview button { padding: 8px 16px; border: 1px solid rgba(255,255,255,0.16); border-radius: 9px; color: white; background: linear-gradient(135deg,#7368f3,#4568ea); box-shadow: 0 9px 20px rgba(39,51,158,0.34); font-weight: 800; cursor: pointer; }
+
+@keyframes picker-in { from { opacity: 0; transform: translateY(8px) scale(0.985); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 520px) {
+  .media-picker { right: 0; bottom: calc(100% - 1px); left: 0; width: 100%; max-height: min(68dvh,620px); border-radius: 22px 22px 0 0; }
+  .emoji-grid { grid-template-columns: repeat(7,1fr); }
+}

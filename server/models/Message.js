@@ -15,7 +15,18 @@ const messageSchema = new mongoose.Schema(
     },
     text:{
         type:String,
-        required:true
+        required:true,
+        trim:true,
+        maxlength:2000
+    },
+    type:{
+        type:String,
+        enum:['text','sticker','meme'],
+        default:'text'
+    },
+    assetId:{
+        type:String,
+        default:null
     },
 },{timestamps:true} );
 

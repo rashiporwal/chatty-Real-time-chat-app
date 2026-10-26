@@ -1,10 +1,12 @@
 import { io } from 'socket.io-client';
 
 const SERVER_URL = 
-    process.env.NODE_ENV === 'production'
-       ? window.location.origin
-       : 'http://localhost:5000';
+    import.meta.env.VITE_SOCKET_URL ||
+    (import.meta.env.DEV ? 'http://localhost:5000' : window.location.origin);
 
-const socket = io(SERVER_URL);
+const socket = io(SERVER_URL, {
+    autoConnect: false,
+    transports: ['websocket', 'polling'],
+});
 
 export default socket;
